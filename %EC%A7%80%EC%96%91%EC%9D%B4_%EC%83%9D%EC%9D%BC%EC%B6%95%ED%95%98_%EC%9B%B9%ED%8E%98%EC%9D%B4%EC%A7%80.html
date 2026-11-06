@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>지양이의 생일 파티 💗</title>
+<style>
+:root{--pink:#f7c9dc;--deep:#a83e70;--cream:#fffaf4;--rose:#fbe5ee}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Pretendard","Apple SD Gothic Neo",system-ui,sans-serif;background:linear-gradient(135deg,#fff5f8,#fff9ef);color:#63364d;min-height:100vh}
+main{width:min(760px,92%);margin:28px auto;padding:18px}
+.hero,.panel{background:#ffffffd9;border:1px solid #f3d6e2;border-radius:28px;box-shadow:0 12px 35px #b45b7c18;padding:clamp(20px,5vw,38px);text-align:center;margin-bottom:18px}
+.ribbon{font-size:1.5rem;letter-spacing:.35rem}
+h1{font-size:clamp(2.2rem,8vw,4rem);color:var(--deep);margin:12px 0 4px}
+h2{color:var(--deep);margin:0 0 12px}
+.sub{color:#98627a}
+button{border:0;border-radius:999px;padding:13px 22px;font-size:1rem;font-weight:750;background:var(--deep);color:white;cursor:pointer;margin:6px;box-shadow:0 5px 12px #a83e7030}
+button.secondary{background:#f7e0ea;color:#8d3b64}
+button:focus-visible{outline:3px solid #d77da5;outline-offset:3px}
+.hidden{display:none!important}
+.cake{font-size:clamp(5rem,20vw,8rem);margin:8px}
+.gift{font-size:5rem;cursor:pointer;user-select:none;transition:transform .2s}
+.gift:hover{transform:scale(1.08) rotate(-4deg)}
+.letter{background:#fff9e9;border:1px dashed #e9b9cb;border-radius:18px;padding:22px;text-align:left;line-height:1.9;white-space:pre-line}
+.sparkles{font-size:1.7rem;line-height:2}
+footer{text-align:center;color:#b17a94;font-size:.85rem;padding:14px}
+.confetti{position:fixed;top:-20px;pointer-events:none;animation:fall 3.5s linear forwards;z-index:5}
+@keyframes fall{to{transform:translateY(110vh) rotate(700deg);opacity:.2}}
+@media(prefers-reduced-motion:reduce){.confetti{animation:none}}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+  <div class="ribbon">🎀 ✨ 🎀</div>
+  <h1>Happy Birthday!</h1>
+  <h2 style="font-size:2rem">지양아 ♡</h2>
+  <p class="sub">오늘은 네가 세상에서 가장 빛나는 주인공!</p>
+  <div class="sparkles">🌷 🧸 💗 🎈 🌷</div>
+  <button id="enter">🎉 생일 파티 입장하기</button>
+</section>
+
+<div id="party" class="hidden">
+<section class="panel">
+  <h2>🎂 지양이의 생일 케이크</h2>
+  <div class="cake" id="cake">🎂</div>
+  <p id="candleText">눈을 감고 소원을 빈 다음 촛불을 꺼봐!</p>
+  <button id="blow">💨 후~ 촛불 끄기</button>
+</section>
+
+<section class="panel">
+  <h2>🎁 깜짝 선물 상자</h2>
+  <div class="gift" id="gift" role="button" tabindex="0" aria-label="선물 상자 열기">🎁</div>
+  <p id="giftText">상자를 톡 눌러 선물을 열어봐!</p>
+</section>
+
+<section class="panel">
+  <h2>💌 지양이에게 보내는 편지</h2>
+  <button class="secondary" id="openLetter">편지 열어보기</button>
+  <div id="letter" class="letter hidden">사랑하는 지양아! 💗
+
+생일 진심으로 축하해!!
+
+너와 함께 웃고 이야기할 수 있어서 참 행복해.
+앞으로도 지금처럼 예쁜 추억 많이 만들자.
+
+네가 걸어가는 모든 길에 행복한 일들이 가득하길 바라!
+태어나줘서 고마워. 오늘 하루 누구보다 행복하게 보내!
+
+너의 소중한 친구가 ♡</div>
+</section>
+
+<section class="panel">
+  <h2>🥳 오늘의 마지막 축하!</h2>
+  <p>지양아, 생일 정말 정말 축하해!</p>
+  <button id="final">🎆 축하 폭죽 터뜨리기</button>
+  <div id="finalText" class="sparkles hidden">🎉 💖 🎂 💖 🎉<br><strong style="color:#a83e70">지양이의 모든 날이 행복으로 가득하길!</strong></div>
+</section>
+</div>
+<footer>MADE WITH LOVE FOR JIYANG ♡</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+function confetti(){const bits=['💗','✨','🎉','🌸','🎀','⭐'];for(let i=0;i<34;i++){const s=document.createElement('span');s.className='confetti';s.textContent=bits[Math.floor(Math.random()*bits.length)];s.style.left=Math.random()*100+'vw';s.style.fontSize=(14+Math.random()*20)+'px';s.style.animationDelay=(Math.random()*.8)+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),4500)}}
+$('enter').onclick=()=>{$('party').classList.remove('hidden');$('enter').textContent='파티가 시작됐어! 💗';confetti();$('enter').disabled=true};
+$('blow').onclick=()=>{$('cake').textContent='🍰';$('candleText').textContent='소원 빌기 성공! 지양이의 소원이 꼭 이루어지길 ✨';$('blow').textContent='초를 껐어! 🥳';confetti()};
+function openGift(){$('gift').textContent='💝';$('giftText').textContent='짜잔! 세상에서 가장 귀한 선물은 지양이와 함께하는 소중한 시간! 앞으로도 행복한 추억 많이 만들자 💐';confetti()}
+$('gift').onclick=openGift;$('gift').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openGift()}};
+$('openLetter').onclick=()=>{$('letter').classList.toggle('hidden');$('openLetter').textContent=$('letter').classList.contains('hidden')?'편지 열어보기':'편지 닫기'};
+$('final').onclick=()=>{$('finalText').classList.remove('hidden');confetti()};
+</script>
+</body>
+</html>
